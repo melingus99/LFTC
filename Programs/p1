@@ -1,0 +1,11 @@
+void Main():
+int a = input();
+bool ok=True;
+for(int i in [2:a/2]):
+if (a % i eq 0):
+ok = False;
+break;
+end;
+end;
+print(ok);
+end;

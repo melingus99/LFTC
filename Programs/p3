@@ -1,0 +1,11 @@
+void Main():
+string a = input();
+bool ok = 0;
+int k = 0;
+for(string i in a):
+if(i eq ‘A’ or i eq ‘E’ or i eq ‘I’ or i eq ‘O’ or i eq ‘U’):
+k += 1;
+end;
+end;
+print(k);
+end;

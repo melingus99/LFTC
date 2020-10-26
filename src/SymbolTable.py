@@ -4,17 +4,17 @@ class SymbolTable():
     #output:ST object
     def __init__(self,key=7,hash=''):
         if hash =='':
-            self.hash=self.myHash
+            self.__hash=self.__myHash
         else:
-            self.hash=hash
-        self.key=key
+            self.__hash=hash
+        self.__key=key
         self.table={}
 
     #preconditions:symbol must be a string
     #input:string-the symbol to be hashed
     #output:integer
     #this function returns the sum of the ascii code of all the letters % 7
-    def myHash(self,key,symbol):
+    def __myHash(self,key,symbol):
         return sum(ord(ch) for ch in symbol)%key
 
     #preconditions: symbol must be a string
@@ -22,7 +22,9 @@ class SymbolTable():
     #output:
     #this function inserts in the symbol table the given string in the aproppiate hash index
     def insert(self,symbol):
-        val=self.hash(self.key,symbol)
+        if self.search(symbol)!=False:
+            return
+        val=self.__hash(self.__key,symbol)
         if val in self.table:
             self.table[val].append(symbol)
         else:
@@ -34,12 +36,12 @@ class SymbolTable():
     #        False - the symbol does not exists in the ST
     #this function checks if the given string exists in the symbol table
     def search(self,symbol):
-        val=self.hash(self.key,symbol)
+        val=self.__hash(self.__key,symbol)
         if val not in self.table:
             return False
 
-        for i in self.table[val]:
-            if i==symbol:
-                return True
+        for i in range(len(self.table[val])):
+            if self.table[val][i]==symbol:
+                return i
 
         return False
