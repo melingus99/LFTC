@@ -22,7 +22,7 @@ class SymbolTable():
     #output:
     #this function inserts in the symbol table the given string in the aproppiate hash index
     def insert(self,symbol):
-        if self.search(symbol)!=False:
+        if self.search(symbol)!=-1:
             return
         val=self.__hash(self.__key,symbol)
         if val in self.table:
@@ -38,10 +38,10 @@ class SymbolTable():
     def search(self,symbol):
         val=self.__hash(self.__key,symbol)
         if val not in self.table:
-            return False
+            return -1
 
         for i in range(len(self.table[val])):
             if self.table[val][i]==symbol:
                 return i
 
-        return False
+        return -1

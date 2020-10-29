@@ -36,6 +36,8 @@ def detect(path):
         if text[i] in lookup and text[i+2]=='=':
             text[i]=text[i]+'='
             text[i+2]=''
+        if text[i].startswith('â€˜') and text[i].endswith('â€™'):
+            text[i]="'"+text[i][3:-3]+"'"
 
     return text
 
@@ -58,29 +60,32 @@ def scan(path):
     digits='0 1 2 3 4 5 6 7 8 9'
     digits=digits.split(' ')
     digits=tuple(digits)
-
+    line=1
     for token in text:
+        if token=='\n':
+            line+=1
         if token !='':
             if token in RWOS:
                 st.table[-1].append(token)
                 pif[token]=-1
+            elif (token.startswith(digits) and any(letter in token for letter in letters)==False)\
+                    or (token.startswith("'") and token.endswith("'")):
+                st.insert(token)
+                pif['ct']=st.search(token)
             elif token.startswith(letters):
                 st.insert(token)
                 pif['id']=st.search(token)
-            elif token.startswith(digits):
-                st.insert(token)
-                pif['ct']=st.search(token)
+
             else:
-                message='lexical error +location'
+                message='lexical error at line: ' +str(line)
                 print(token)
     if message=='':
         message='lexically correct'
 
     return pif,st,message
 
-text=detect("C:\\Users\\Bubu\\LFTC\\Programs\\p1")
-print(text)
-pif,st,message=scan("C:\\Users\\Bubu\\LFTC\\Programs\\p1")
+
+pif,st,message=scan("C:\\Users\\Bubu\\LFTC\\Programs\\p3")
 
 print(message)
 print(st.table)
