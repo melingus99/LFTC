@@ -1,0 +1,28 @@
+
+Alphabet:
+Upper case english letters(A-Z) and lower case english letters(a-z)
+A B C D E F G H I J K L M N O P Q R S T U V W
+a b c d e f g h i j k l m n o p q r s t u v w x y z
+Underline character ‘_’
+Decimal digit: 0 1 2 3 4 5 6 7 8 9
+
+Special symbols:
+operators: +,-,*,/,=,<,<=,>=,%, !=, *=, /=,
+Separators: [ ] ( ) : ; space ,
+Reserverd words: bool, string, int, eq, if,else, for, while, True, False, break, end, input, print, in, const, or, and, void Main
+
+Identifiers:
+	identifier = letter| letter {letter} {digit} {“_”}
+	letter= “A”|”B”|”C”|”D”|”E”|”F”|”G”|”H”|”I”|”J”|”K”|”L”|”M”|”N”|”O”|”P”|”Q”|”R”|”S”|”T”|”U”|”V”|”W”|”X”|”Y”|”Z”|”a”|”b”|”c”|”d”|”e”|”f”|”g”|”h”|”i”|”j”|”k”|”l”|”m”|”n”|”o”|”p”|”q”|”r”|”s”|”t”|”u”|”v”|”w”|”x”|”y”|”z”
+	digit=”0”|”1”|”2”|”3”|”4”|”5”|”6”|”7”|”8”|”9”
+
+Constants:
+
+Integer:
+	integer = 0|[“-”|”+”] nonZeroDigit {digit}
+	nonZeroDigit = ”1”|”2”|”3”|”4”|”5”|”6”|”7”|”8”|”9”
+	digit=”0”|”1”|”2”|”3”|”4”|”5”|”6”|”7”|”8”|”9”
+String:
+	String= “ ‘ “ { (letter| digit) } “ ‘ “
+	letter= “A”|”B”|”C”|”D”|”E”|”F”|”G”|”H”|”I”|”J”|”K”|”L”|”M”|”N”|”O”|”P”|”Q”|”R”|”S”|”T”|”U”|”V”|”W”|”X”|”Y”|”Z”|”a”|”b”|”c”|”d”|”e”|”f”|”g”|”h”|”i”|”j”|”k”|”l”|”m”|”n”|”o”|”p”|”q”|”r”|”s”|”t”|”u”|”v”|”w”|”x”|”y”|”z”
+digit=”0”|”1”|”2”|”3”|”4”|”5”|”6”|”7”|”8”|”9”

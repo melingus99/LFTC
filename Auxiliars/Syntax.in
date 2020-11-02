@@ -1,0 +1,42 @@
+
+program = “Void Main” “(“ declist “)” “:” cmpstmt
+
+declist = declaration | declaration “,” declist
+
+declaration = type identifier
+
+type1 = “bool” | “string” | “int”
+
+array = type identifier “[“ { constant “,” } “]”
+
+type= type1| array
+
+cmpstmt = stmtlist “end”
+
+stmtlist = stmt | stmt “;” stmtlist
+
+stmt = simplstmt | structstmt
+
+simplstmt = assignstmt | iostmt
+
+assignstmt = identifier (“=”|”+=”|”-=”|”*=”|”/=”) expression
+
+expression = expression (“+”|”-”|”*”|”/”) term | term
+
+term = term “*” factor | factor
+
+factor = “(“ expression “)” | identifier
+
+iostmt = “input” | “print” “(“ identifier “)”
+
+structstmt = cmpstmt | ifstmt | whilestmt | forstmt
+
+ifstmt = “if” “(“ condition “)” “:” stmt “end” [“else” stmt]
+
+whilestmt = “while” “(“ condition “)” “:” stmt “end”
+
+forstmt = “for” “(“ type1 identifier “in” identifier “)” “:” stmt
+
+condition = expression relation expression { (“and”|”or”) expression relation expression}
+
+relation = “<”| “<=” | “eq” | “!=” | “>=” | “>”

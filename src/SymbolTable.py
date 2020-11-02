@@ -1,3 +1,4 @@
+#Symbol Table represented as hashmap
 class SymbolTable():
     #input:key - if you want to use a custom key
     #      function - if you want to use a custom function
