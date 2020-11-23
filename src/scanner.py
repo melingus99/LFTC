@@ -1,6 +1,6 @@
 from src.SymbolTable import SymbolTable
 import re
-
+from src.FA import FA
 
 class Scanner():
     def __init__(self,tokensPath):
@@ -58,13 +58,14 @@ class Scanner():
         RWOS,pos=self.__listRWOS()
         text=self.detect(path)
         st=SymbolTable()
+        indFA=FA("C:\\Users\\Bubu\\LFTC\\Auxiliars\\indFA.in")
+        ctFA=FA("C:\\Users\\Bubu\\LFTC\\Auxiliars\\CtFA.in")
         st.table[-1]=[]
         pif={}
         message=''
         letters='a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'
         letters=letters.split(' ')
         letters=tuple(letters)
-
         digits='0 1 2 3 4 5 6 7 8 9'
         digits=digits.split(' ')
         digits=tuple(digits)
@@ -77,30 +78,12 @@ class Scanner():
                 if token in RWOS:
                     st.table[-1].append(token)
                     pif[token]=-1
-
-                elif (token.startswith(digits) and any(letter in token for letter in letters)==False)\
-                        or (token.startswith("'") and token.endswith("'")) \
-                        or (token.startswith(('-','+')) and any(digit in token for digit in digitsNoZero)==True):
+                elif ((ctFA.isIntOrCt(token)==True) or (token.startswith("'") and token.endswith("'"))):
                     st.insert(token)
                     pif['ct']=st.search(token)
-
-                elif token.startswith(letters):
-                    final=False
-                    ok=True
-                    for c in token:
-                        if c in digits:
-                            final=True
-                        if c not in letters and c not in digits:
-                            ok=False
-                        if final==True and c in letters:
-                            ok=False
-
-                    if ok==False:
-                        message='lexical error at line: ' +str(line)
-                    else:
-                        st.insert(token)
-                        pif['id']=st.search(token)
-
+                elif indFA.isIntOrCt(token)==True:
+                    st.insert(token)
+                    pif['id']=st.search(token)
                 else:
                     message='lexical error at line: ' +str(line)
         if message=='':
@@ -109,3 +92,26 @@ class Scanner():
         return pif,st,message
 
 
+'''
+elif (token.startswith(digits) and any(letter in token for letter in letters)==False)\
+        or (token.startswith("'") and token.endswith("'")) \
+        or (token.startswith(('-','+')) and any(digit in token for digit in digitsNoZero)==True):
+    st.insert(token)
+    pif['ct']=st.search(token)
+elif token.startswith(letters):
+    final=False
+    ok=True
+    for c in token:
+        if c in digits:
+            final=True
+        if c not in letters and c not in digits:
+            ok=False
+        if final==True and c in letters:
+            ok=False
+
+    if ok==False:
+        message='lexical error at line: ' +str(line)
+    else:
+        st.insert(token)
+        pif['id']=st.search(token)
+'''
