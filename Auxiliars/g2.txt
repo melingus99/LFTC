@@ -1,0 +1,55 @@
+Order: non-terminals, terminals, start, productions
+program declist declaration type1 array type cmpstmt stmtlist stmt simplstmt assignstmt expression term factor iostmt structstmt ifstmt whilestmt forstmt condition relation
++ - * / = < <= >= % != *= /= += -= [ ] ( ) : ; , bool string int eq if else for while True False break end input print in const or and void Main
+program
+program -> void Main ( declist ) : cmpstmt
+declist -> declaration
+declist -> declaration , declist
+declaration -> type identifier
+type1 -> bool
+type1 -> string
+type1 -> int
+array -> type identifier [ {​​​​​ constant }​​​​ ]
+array -> type identifier [ ]
+type -> type1
+type -> array
+cmpstmt -> stmtlist“end
+stmtlist -> stmt
+stmtlist -> stmt ; stmtlist
+stmt -> simplstmt
+stmt -> structstmt
+simplstmt -> assignstmt
+simplstmt -> iostmt
+assignstmt -> identifier = expression
+assignstmt -> identifier += expression
+assignstmt -> identifier -= expression
+assignstmt -> identifier *= expression
+assignstmt -> identifier /= expression
+expression -> expression + term
+expression -> expression - term
+expression -> expression * term
+expression -> expression / term
+expression -> term
+term -> term * factor
+term -> factor
+factor -> ( expression )
+factor -> identifier
+iostmt -> input
+iostmt -> print ( identifier )
+structstmt -> cmpstmt
+structstmt -> ifstmt
+structstmt -> whilestmt
+structstmt -> forstmt
+ifstmt -> if ( condition ) : stmt end
+ifstmt -> if ( condition ) : stmt end else stmt
+whilestmt -> while ( condition ) : stmt end
+forstmt -> for ( type1 identifier in identifier ) : stmt
+condition -> expression relation expression
+condition -> expression relation expression and expression relation expression
+condition -> expression relation expression or expression relation expression
+relation -> <
+relation -> <=
+relation -> eq
+relation -> !=
+relation -> >=
+relation -> >

@@ -1,0 +1,9 @@
+Order: non-terminals, terminals, start, productions
+S C
+a b
+S
+S -> a b
+S -> a C S b
+C -> S
+C -> b S b
+CS -> b
