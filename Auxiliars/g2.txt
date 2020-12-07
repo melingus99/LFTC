@@ -9,11 +9,11 @@ declaration -> type identifier
 type1 -> bool
 type1 -> string
 type1 -> int
-array -> type identifier [ {​​​​​ constant }​​​​ ]
+array -> type identifier [ constant ]
 array -> type identifier [ ]
 type -> type1
 type -> array
-cmpstmt -> stmtlist“end
+cmpstmt -> stmtlist end
 stmtlist -> stmt
 stmtlist -> stmt ; stmtlist
 stmt -> simplstmt

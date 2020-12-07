@@ -5,9 +5,7 @@ class Parser:
   #output:
   def __init__(self,grammar):
     self.grammar=grammar
-    self.start= ('x',self.grammar.start, 0)
-    self.working=[]
-    self.input=[]
+    self.start= ('x',[self.grammar.start], 0)
 
   #preconditions
   #postconditions
@@ -19,6 +17,7 @@ class Parser:
     while flag == 1:
       flag=0
       for it in C:
+        # print(it)
         if it[2] == len(it[1]):
           if it not in C:
             C.append(it)
@@ -48,18 +47,23 @@ class Parser:
   #preconditions:
   #postconditions
   #input:
-  #output:C-list of all LR(0) items
+  #output:C-map of state and LR(0) items
   def CanonicalCollection(self):
     C = []
+    c={}
     s0 = self.closure([self.start])
+    c['s0']=s0
     C.extend(s0)
     flag = 1
+    i=0
     while flag:
       flag = 0
       for item in C:
         for symbol in self.grammar.N + self.grammar.Sigma:
           gt = self.goto([item], symbol)
-          if len(gt) != 0 and not set(gt).issubset(set(C)):
+          if len(gt) != 0 and gt[0] not in C:
+            c['s'+str(i)]=gt
+            i+=1
             C.extend(gt)
             flag=1
-    return C
+    return c
