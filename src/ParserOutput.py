@@ -7,7 +7,11 @@ class ParserOutput:
   #output:
   def __init__(self,parser,input):
     self.parser=parser
-    self.tree=self.buildTree(parser.parse(input))
+    try:
+      self.tree=self.buildTree(parser.parse(input))
+    except Exception as e:
+      print(e)
+      self.tree=None
 
   #preconditions:
   #postconditions:
@@ -55,4 +59,4 @@ class ParserOutput:
   def writeFile(self,file):
     f=open(file,"w")
     for i in self.tree.breadthSearch():
-      f.write("node: {}, Symbol: {}, Father: {}, Sibling: {}".format(i[0],i[1],i[2],i[3]))
+      f.write("node: {}, Symbol: {}, Father: {}, Sibling: {}\n".format(i[0],i[1],i[2],i[3]))

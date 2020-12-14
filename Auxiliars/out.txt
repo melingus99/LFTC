@@ -1,0 +1,6 @@
+node: 0, Symbol: S, Father: None, Sibling: None
+node: 1, Symbol: a, Father: 0, Sibling: None
+node: 2, Symbol: A, Father: 0, Sibling: 1
+node: 3, Symbol: b, Father: 2, Sibling: None
+node: 4, Symbol: A, Father: 2, Sibling: 3
+node: 5, Symbol: c, Father: 4, Sibling: None

@@ -140,31 +140,31 @@ class Parser:
   #input:w- list of strings
   #output:
   def parse(self, w):
-    self.makeTable()
+    print(self.makeTable())
     state = "s0"
     alpha = ["s0"]
     beta = w
     phi = []
-    while True:
-      action = self.table[state][0]
-      if action == "shift":
-        a = beta[0]
-        beta = beta[1:]
-        state = str(self.table[state][1][a])
-        alpha.extend([a, str(state)])
-      elif "reduce" in action:
-        lhp, rhp = self.getProdAtIndex(int(action.replace("reduce ", "")))
-        while alpha[-2] != rhp[0]:
+    a = None
+    try:
+      while True:
+        action = self.table[state][0]
+        if action == "shift":
+          a = beta[0]
+          beta = beta[1:]
+          state = str(self.table[state][1][a])
+          alpha.extend([a, str(state)])
+        elif "reduce" in action:
+          lhp, rhp = self.getProdAtIndex(int(action.replace("reduce ", "")))
+          while alpha[-2] != rhp[0]:
+            alpha.pop()
+            alpha.pop()
           alpha.pop()
           alpha.pop()
-        alpha.pop()
-        alpha.pop()
-
-        state = str(self.table[alpha[-1]][1][lhp[0]])
-        alpha.extend([lhp[0], str(state)])
-        phi = [int(action.replace("reduce ", ""))] + phi
-      elif action == "accept":
-        return phi
-      elif action == "error":
-        return None
-
+          state = str(self.table[alpha[-1]][1][lhp[0]])
+          alpha.extend([lhp[0], str(state)])
+          phi = [int(action.replace("reduce ", ""))] + phi
+        elif action == "accept":
+          return phi
+    except:
+      raise Exception("Error at '" + a + "'")

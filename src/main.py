@@ -7,5 +7,6 @@ g.readGrammar()
 parser=Parser(g)
 f = open("C:\\Users\\Bubu\\LFTC\\Auxiliars\\w.txt", "r")
 parserOutput = ParserOutput(parser,list(f.read()))
-parserOutput.printDS()
-parserOutput.writeFile("C:\\Users\\Bubu\\LFTC\\Auxiliars\\out.txt")
+if parserOutput.tree!=None:
+    parserOutput.printDS()
+    parserOutput.writeFile("C:\\Users\\Bubu\\LFTC\\Auxiliars\\out.txt")

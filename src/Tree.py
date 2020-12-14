@@ -75,3 +75,4 @@ class Node():
     if length>1:
       node.brother=self.childrens[length-2]
 
+  
