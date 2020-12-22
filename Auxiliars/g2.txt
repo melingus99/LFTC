@@ -1,8 +1,9 @@
 Order: non-terminals, terminals, start, productions
 program declist declaration type1 array type cmpstmt stmtlist stmt simplstmt assignstmt expression term factor iostmt structstmt ifstmt whilestmt forstmt condition relation
-+ - * / = < <= >= % != *= /= += -= [ ] ( ) : ; , bool string int eq if else for while True False break end input print in const or and void Main
++ - * / = < <= >= % != *= /= += -= [ ] ( ) : ; , bool string int eq if else for while True False break end input print in const or and void Main \n
 program
 program -> void Main ( declist ) : cmpstmt
+program -> void Main ( ) : cmpstmt
 declist -> declaration
 declist -> declaration , declist
 declaration -> type identifier

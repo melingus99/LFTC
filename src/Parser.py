@@ -61,11 +61,16 @@ class Parser:
       for item in C:
         for symbol in self.grammar.N + self.grammar.Sigma:
           gt = self.goto([item], symbol)
-          if len(gt) != 0 and gt[0] not in C:
-            c['s'+str(i)]=gt
-            i+=1
-            C.extend(gt)
-            flag=1
+          if len(gt) != 0:
+            for closure in gt:
+              if closure not in C:
+                try:
+                  c['s'+str(i)].append(closure)
+                except:
+                  c['s'+str(i)]=[closure]
+                i+=1
+                C.append(closure)
+                flag=1
     return c
 
   #preconditions:
