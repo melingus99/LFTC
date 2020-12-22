@@ -61,16 +61,11 @@ class Parser:
       for item in C:
         for symbol in self.grammar.N + self.grammar.Sigma:
           gt = self.goto([item], symbol)
-          if len(gt) != 0:
-            for closure in gt:
-              if closure not in C:
-                try:
-                  c['s'+str(i)].append(closure)
-                except:
-                  c['s'+str(i)]=[closure]
-                i+=1
-                C.append(closure)
-                flag=1
+          if len(gt) != 0 and any(i not in C for i in gt):
+            c['s'+str(i)]=gt
+            i+=1
+            C.extend(gt)
+            flag=1
     return c
 
   #preconditions:
@@ -145,7 +140,6 @@ class Parser:
   #input:w- list of strings
   #output:
   def parse(self, w):
-    print(self.makeTable())
     state = "s0"
     alpha = ["s0"]
     beta = w

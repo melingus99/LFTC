@@ -3,17 +3,15 @@ from src.Parser import Parser
 from src.ParserOutput import ParserOutput
 from src.scanner import Scanner
 import json
-g=Grammar('C:\\Users\\Bubu\\LFTC\\Auxiliars\\g2.txt')
+g=Grammar('C:\\Users\\Bubu\\LFTC\\Auxiliars\\g1.txt')
 g.readGrammar()
 parser=Parser(g)
 da = parser.makeTable()
-for i in da:
-  print(i + ": " + str(da[i]))
-# f = open("C:\\Users\\Bubu\\LFTC\\Auxiliars\\w.txt", "r")
-# parserOutput = ParserOutput(parser,list(f.read()))
-# if parserOutput.tree!=None:
-#     parserOutput.printDS()
-#     parserOutput.writeFile("C:\\Users\\Bubu\\LFTC\\Auxiliars\\out.txt")
+f = open("C:\\Users\\Bubu\\LFTC\\Auxiliars\\seq.txt", "r")
+parserOutput = ParserOutput(parser,list(f.read()))
+if parserOutput.tree!=None:
+    parserOutput.printDS()
+    parserOutput.writeFile("C:\\Users\\Bubu\\LFTC\\Auxiliars\\out1.txt")
 
 
 # scanner=Scanner("C:\\Users\\Bubu\\LFTC\\Auxiliars\\tokens.in")
