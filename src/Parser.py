@@ -7,6 +7,7 @@ class Parser:
     self.grammar=grammar
     self.start= ('x',[self.grammar.start], 0)
     self.table={}
+    self.makeTable()
 
   #preconditions
   #postconditions
@@ -83,7 +84,7 @@ class Parser:
               if newItem in cancol[state2]:
                 self.table[state][1][item[1][item[2]]]=state2
 
-        elif cancol[state][0][2]==1 and cancol[state][0][1]==['S']:
+        elif cancol[state][0][2]==1 and cancol[state][0][1]==[self.grammar.start]:
           self.table[state]=('accept',{})
 
         elif cancol[state][0][2]==len(cancol[state][0][1]):
@@ -140,6 +141,8 @@ class Parser:
   #input:w- list of strings
   #output:
   def parse(self, w):
+    # for i in self.table:
+    #   print(i + "->" + str(self.table[i]))
     state = "s0"
     alpha = ["s0"]
     beta = w
@@ -147,6 +150,7 @@ class Parser:
     a = None
     try:
       while True:
+        print(a)
         action = self.table[state][0]
         if action == "shift":
           a = beta[0]
@@ -160,10 +164,11 @@ class Parser:
             alpha.pop()
           alpha.pop()
           alpha.pop()
-          state = str(self.table[alpha[-1]][1][lhp[0]])
-          alpha.extend([lhp[0], str(state)])
+          state = str(self.table[alpha[-1]][1][lhp])
+          alpha.extend([lhp, str(state)])
           phi = [int(action.replace("reduce ", ""))] + phi
         elif action == "accept":
           return phi
-    except:
+    except Exception as e:
+      print(e)
       raise Exception("Error at '" + a + "'")

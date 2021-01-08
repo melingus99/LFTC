@@ -61,7 +61,7 @@ class Scanner():
         indFA=FA("C:\\Users\\Bubu\\LFTC\\Auxiliars\\indFA.in")
         ctFA=FA("C:\\Users\\Bubu\\LFTC\\Auxiliars\\CtFA.in")
         st.table[-1]=[]
-        pif={}
+        pif=[]
         message=''
         letters='a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z'
         letters=letters.split(' ')
@@ -77,13 +77,16 @@ class Scanner():
             if token !='':
                 if token in RWOS:
                     st.table[-1].append(token)
-                    pif[token]=-1
+                    #pif[token]=-1
+                    pif.append((token,-1))
                 elif ((ctFA.isIntOrCt(token)==True) or (token.startswith("'") and token.endswith("'"))):
                     st.insert(token)
-                    pif['ct']=st.search(token)
+                    #pif['ct']=st.search(token)
+                    pif.append(('constant',st.search(token)))
                 elif indFA.isIntOrCt(token)==True:
                     st.insert(token)
-                    pif['id']=st.search(token)
+                    #pif['id']=st.search(token)
+                    pif.append(('identifier',st.search(token)))
                 else:
                     message='lexical error at line: ' +str(line)
         if message=='':

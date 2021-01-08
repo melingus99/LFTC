@@ -3,19 +3,25 @@ from src.Parser import Parser
 from src.ParserOutput import ParserOutput
 from src.scanner import Scanner
 import json
-g=Grammar('C:\\Users\\Bubu\\LFTC\\Auxiliars\\g1.txt')
-g.readGrammar()
-parser=Parser(g)
-da = parser.makeTable()
-f = open("C:\\Users\\Bubu\\LFTC\\Auxiliars\\seq.txt", "r")
-parserOutput = ParserOutput(parser,list(f.read()))
-if parserOutput.tree!=None:
-    parserOutput.printDS()
-    parserOutput.writeFile("C:\\Users\\Bubu\\LFTC\\Auxiliars\\out1.txt")
 
+scanner=Scanner("Auxiliars/tokens.in")
+pif,st,message=scanner.scan(path='Programs/p1')
+if message=='lexically correct':
+    pifParser=pif[:]
+    for i in pifParser:
+        if i[0]==' ' or i[0]=='\n':
+            pifParser.remove(i)
 
-# scanner=Scanner("C:\\Users\\Bubu\\LFTC\\Auxiliars\\tokens.in")
-# pif,st,message=scanner.scan("C:\\Users\\Bubu\\LFTC\\Programs\\p1")
-#
-# f=open('C:\\Users\\Bubu\\LFTC\\Auxiliars\\pif.out','w')
-# json.dump(pif,f)
+    for i in range(len(pifParser)):
+        pifParser[i]=pifParser[i][0]
+
+    grammar=Grammar('Auxiliars/g2.txt')
+    grammar.readGrammar()
+    parser=Parser(grammar)
+    parserOutput=ParserOutput(parser=parser,input=pifParser)
+    if parserOutput.tree!=None:
+      parserOutput.printDS()
+      parserOutput.writeFile("out.txt")
+
+else:
+    print(message)

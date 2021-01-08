@@ -1,6 +1,6 @@
 Order: non-terminals, terminals, start, productions
 program declist declaration type1 array type cmpstmt stmtlist stmt simplstmt assignstmt expression term factor iostmt structstmt ifstmt whilestmt forstmt condition relation
-+ - * / = < <= >= % != *= /= += -= [ ] ( ) : ; , bool string int eq if else for while True False break end input print in const or and void Main \n
++ - * / = < <= >= % != *= /= += -= [ ] ( ) : ; , bool string int eq if else for while True False break end input print in const or and void Main identifier constant \n
 program
 program -> void Main ( declist ) : cmpstmt
 program -> void Main ( ) : cmpstmt
@@ -14,11 +14,12 @@ array -> type identifier [ constant ]
 array -> type identifier [ ]
 type -> type1
 type -> array
-cmpstmt -> stmtlist end
+cmpstmt -> stmtlist end;
 stmtlist -> stmt
 stmtlist -> stmt ; stmtlist
 stmt -> simplstmt
 stmt -> structstmt
+stmt -> declist
 simplstmt -> assignstmt
 simplstmt -> iostmt
 assignstmt -> identifier = expression
@@ -35,7 +36,7 @@ term -> term * factor
 term -> factor
 factor -> ( expression )
 factor -> identifier
-iostmt -> input
+iostmt -> identifier = input ( )
 iostmt -> print ( identifier )
 structstmt -> cmpstmt
 structstmt -> ifstmt

@@ -1,0 +1,11 @@
+void Main():
+int a;
+ a= input();
+int inv;
+inv= 0;
+while(a != 0):
+inv *= 10 + a%10;
+a /= 10;
+end;
+print(inv);
+end;

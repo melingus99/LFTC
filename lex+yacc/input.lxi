@@ -1,0 +1,39 @@
+%option noyywrap
+%{
+#include <math.h>
+%}
+
+DIGIT       [0-9]
+DIGITZ      [1-9]
+ID          [a-z][a-z0-9_]*
+integerct   0|([-|+]?[1-9]+[0-9]*)
+stringct    '[a-zA-z0-9]*'
+%%
+
+{integerct}+ 	printf( "int constant-> %s\n", yytext );
+
+{stringct}+     printf("string constant-> %s \n",yytext);
+
+"bool"|"string"|"int"|"eq"|"if"|"else"|"for"|"while"|"True"|"False"|"break"|"end"|"input"|"print"|"in"|"const"|"or"|"and"|"void"|"Main"  printf( "keyword-> %s\n", yytext );
+
+{ID} 		    printf( "identifier-> %s\n", yytext );
+
+"+"|"-"|"*"|"/"|"="|"<"|"<="|">="|"%"|"!="|"*="|"/=" printf( "operator-> %s\n", yytext );
+
+"["|"]"|"("|")"|":"|";"|"," printf("separator -> %s\n",yytext);
+
+[ \t\n]+ ;
+
+. printf("Eroare\n");
+%%
+main( argc, argv )
+int argc;
+char **argv;
+{
+    ++argv, --argc; /* skip over program name */
+    if ( argc > 0 )
+    yyin = fopen( argv[0], "r" );
+    else
+     yyin = stdin;
+    yylex();
+}
