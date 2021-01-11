@@ -14,7 +14,7 @@ array -> type identifier [ constant ]
 array -> type identifier [ ]
 type -> type1
 type -> array
-cmpstmt -> stmtlist end;
+cmpstmt -> stmtlist end ;
 stmtlist -> stmt
 stmtlist -> stmt ; stmtlist
 stmt -> simplstmt

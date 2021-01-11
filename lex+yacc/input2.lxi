@@ -1,0 +1,49 @@
+%{
+#include "y.tab.h"
+%}
+
+%option noyywrap
+%option caseless
+
+DIGIT       [0-9]
+DIGITZ      [1-9]
+ID          [a-z][a-z0-9_]*
+integerct   0|([-|+]?[1-9]+[0-9]*)
+stringct    '[a-zA-z0-9]*'
+
+%%
+
+{integerct}+ 	{ yylval.p_val = yytext;return INT_CT;}
+
+{stringct}+     {yylval.p_val=yytext;return STRING_CT;}
+
+bool            {return BOOL;}
+string          {return STRING;}
+int             {return INT;}
+eq              {return EQ;}
+if              {return IF;}
+else            {return ELSE;}
+for             {return FOR;}
+while           {return WHILE;}
+true            {return TRUE;}
+false           {return FALSE;}
+break           {return BREAK;}
+end             {return END;}
+input           {return INPUT;}
+print           {return PRINT;}
+in              {return IN;}
+const           {return CONST;}
+or              {return OR;}
+and             {return AND;}
+void            {return VOID;}
+main            {return MAIN;}
+
+{ID} 		    {return IDENTIFIER;}
+
+"+"|"-"|"*"|"/" {return yytext;}
+
+"="|"<"|"<="|">="|"%"|"!="|"*="|"/=" {return yytext;}
+
+"["|"]"|"("|")"|":"|";"|"," {return yytext;}
+
+%%

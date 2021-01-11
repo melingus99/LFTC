@@ -6,6 +6,7 @@ import json
 
 scanner=Scanner("Auxiliars/tokens.in")
 pif,st,message=scanner.scan(path='Programs/p1')
+
 if message=='lexically correct':
     pifParser=pif[:]
     for i in pifParser:
